@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>beforeunload</title>
+</head>
+<body>
+  <a href="/">goto /</a>
+  <label>
+    <input type="checkbox" checked id="prevent"> showConfirmDialog
+  </label>
+  <script>
+    const $prevent = document.getElementById("prevent");
+
+    window.addEventListener("beforeunload", (ev) => {
+      console.log("beforeunload");
+
+      if (!$prevent.checked) return;
+
+      // Spec compliant way, for all browser
+      ev.preventDefault();
+      // Only for Chrome
+      ev.returnValue = "";
+    });
+  </script>
+</body>
+</html>
